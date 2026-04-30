@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+<<<<<<< HEAD
 import { CompareModule } from './compare/compare.module';
 import { DistanceModule } from './distance/distance.module';
 import { NotificationModule } from './notification/notification.module';
@@ -32,6 +35,26 @@ import { AuthModule } from './auth/auth.module';
         ReviewsModule,
         AuthModule,
       ],
+=======
+import { RoomsModule } from './rooms/rooms.module';
+import { Room } from './rooms/entities/room.entity';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'better-sqlite3',
+        database: config.get<string>('DB_DATABASE', 'rooms.db'),
+        entities: [Room],
+        synchronize: config.get<string>('DB_SYNCHRONIZE') === 'true',
+      }),
+    }),
+    RoomsModule,
+  ],
+>>>>>>> 8dfe44e (creted the endpoints for room, entities and dto)
   controllers: [AppController],
   providers: [AppService],
 })
