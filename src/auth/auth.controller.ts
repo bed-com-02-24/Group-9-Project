@@ -1,0 +1,32 @@
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
+
+@Controller('api/v1/auth')
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
+  @Post('register')
+  register(@Body() dto: RegisterDto) {
+    return this.authService.register(dto);
+  }
+
+  //Login endpoint
+  @Post('login')
+  login(@Body() dto: LoginDto) {
+    return this.authService.login(dto);
+  }
+
+    //current user endpoint
+    @Get('me')
+    getCurrentUser(@Body() req) {
+      return req.user;
+    }
+
+    //logout
+    @Post('logout')
+    logout() {
+        return { message: 'Logged out successfully' };
+    }
+}
