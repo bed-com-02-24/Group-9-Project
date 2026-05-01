@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Controller, Get, Put, Delete, Param, Body, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -28,3 +29,9 @@ export class UsersController {
     return this.usersService.remove(id);
   }
 }
+=======
+import { Controller } from '@nestjs/common';
+
+@Controller('users')
+export class UsersController {}
+>>>>>>> 9078b7b054acb8f9f2a03e9e73fb83cf179f36f5
