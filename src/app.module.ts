@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { BookingsModule } from './bookings/bookings.module';
 
 @Module({
   imports: [
@@ -11,14 +12,14 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     TypeOrmModule.forRoot({
       type: 'oracle',
-      connectString: 'localhost:1521/system_pdb',
-      username: 'system_user',
-      password: 'amelikano',
-      serviceName: 'system_pdb',
+      username: 'bookings',
+      password: '12345678',
+      serviceName: 'bookings_pdb',
       synchronize: true,
       logging: true,
       autoLoadEntities: true,
     }),
+    BookingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
