@@ -8,23 +8,23 @@ import {
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ length: 255 })
-  name: string;
+  name!: string;
 
   @Column({ unique: true, length: 255 })
-  email: string;
+  email!: string;
 
   @Column({ length: 255 })
-  password: string;
+  password!: string;
 
   @Column({ length: 20, default: 'student' })
-  role: string;
+  role!: string;
 
   @Column({ nullable: true })
-  phone: string;
+  phone?: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 }

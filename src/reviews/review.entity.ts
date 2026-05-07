@@ -4,20 +4,20 @@ import { User } from '../users/entities/user.entity';
 @Entity('reviews')
 export class Review {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  roomId: string;
+  roomId!: string;
 
   @Column()
-  rating: number; // 1 to 5
+  rating!: number; // 1 to 5
 
   @Column({ nullable: true })
-  comment: string;
-s
+  comment?: string;
+
   @ManyToOne(() => User, { eager: true })
-  student: User;
+  student!: User;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 }
