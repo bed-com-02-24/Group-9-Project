@@ -3,10 +3,22 @@ import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  create(arg0: { 
+    name: string; 
+    email: string; 
+    role: string; 
+    password: any; 
+  }) {
+    throw new Error('Method not implemented.');
+  }
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService
+  ) {}
 
   async register(dto: RegisterDto) {
     const existing = await this.usersService.findByEmail(dto.email);
@@ -27,7 +39,6 @@ export class AuthService {
     }
 
     return {
-      message: 'User registered successfully',
       user: {
         id: user.id,
         name: user.name,
@@ -49,6 +60,14 @@ export class AuthService {
     if (!match) {
       throw new UnauthorizedException('Invalid credentials');
     }
+
+    const token = this.jwtService.sign;
+
+    const payload = ({ 
+      id: user.id, 
+      email: user.email, 
+      role: user.role 
+    });
 
     return {
       message: 'Login successful',
